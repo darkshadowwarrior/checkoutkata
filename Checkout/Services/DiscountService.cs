@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Checkout.Interfaces;
 using Checkout.Models;
 
 namespace Checkout.Services
 {
-    public class DiscountService
+    public class DiscountService : IDiscountService
     {
         private readonly List<OfferItem> _items;
 

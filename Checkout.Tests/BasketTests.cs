@@ -1,15 +1,31 @@
-﻿using Checkout.Models;
+﻿using System.Collections.Generic;
+using Checkout.Interfaces;
+using Checkout.Models;
 using Checkout.Services;
+using Moq;
 using NUnit.Framework;
 
 namespace Checkout.Tests
 {
     public class BasketTests
     {
+        private Mock<IDiscountService> _discountService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _discountService = new Mock<IDiscountService>();
+            _discountService.Setup(o => o.GetOffers()).Returns(new List<OfferItem>()
+            {
+                new OfferItem() {SKU = "B15", Quantity = 2, OfferPrice = 0.45},
+                new OfferItem() {SKU = "A99", Quantity = 3, OfferPrice = 1.30}
+            });
+        }
+
         [Test]
         public void GivenOneItemToScan_ItemCanBeAddedToBasketCart()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item {SKU = "A99", UnitPrice = 0.50});
 
@@ -21,7 +37,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenThreeItemSToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
@@ -35,7 +51,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenTwoItemToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_80()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
@@ -48,7 +64,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenTwoOfTheSameItemToScan_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_45()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
@@ -61,7 +77,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenThreeOfTheSameItemToScan_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_130()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
@@ -75,7 +91,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenASetOfTheItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_235()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
@@ -92,7 +108,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenASetOfTheItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_470()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
@@ -116,7 +132,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenASetOfTheItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_445()
         {
-            var basket = new BasketService(new DiscountService());
+            var basket = new BasketService(_discountService.Object);
 
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
