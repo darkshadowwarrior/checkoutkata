@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Checkout.Models;
 
 namespace Checkout
@@ -20,6 +21,11 @@ namespace Checkout
         public int GetItemCount()
         {
             return _items.Count;
+        }
+
+        public double GetTotal()
+        {
+            return _items.Sum(o => o.UnitPrice);
         }
     }
 }
