@@ -19,6 +19,6 @@ I would also have them stored in some persistent storage and read from there may
 
 I would refactor the calculation functions into some other service that deals with these types of calculations and account for tax using some sort of tax service
 I also feel that the function that handles the discounts might not be valid where it is but as this is my first checkout 
-system and I'm not fully sure just yet where to take it I have left it in situ for now.
+system and I'm not fully sure just yet where to take it so I have left it in situ for now.
 
-I also think the calculate function is a little over complex is it is working out the amount of discounts to apply per set as well as calculating the discounted cost
+I also think the calculate function is a little over complex as it is working out the amount of discounts to apply per set as well as calculating the discounted cost
