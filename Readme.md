@@ -1,5 +1,3 @@
-/*
- 
 This is a checkout system developed by Ian Richards and was built using a variant of the harry potter kata
 
 The solution is a simple based chackout system that allows a user to scan in an arbitary amount of items 
@@ -24,5 +22,3 @@ I also feel that the function that handles the discounts might not be valid wher
 system and I'm not fully sure just yet where to take it I have left it in situ for now.
 
 I also think the calculate function is a little over complex is it is working out the amount of discounts to apply per set as well as calculating the discounted cost
-
-*/
