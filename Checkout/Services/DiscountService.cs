@@ -11,8 +11,8 @@ namespace Checkout.Services
         {
             _items = new List<OfferItem>()
             {
-                new OfferItem(),
-                new OfferItem()
+                new OfferItem() { SKU = "B15", Quantity = 2, OfferPrice = 0.45},
+                new OfferItem() { SKU = "A99", Quantity = 3, OfferPrice = 1.30}
             };
         }
 

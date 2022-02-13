@@ -25,6 +25,7 @@ namespace Checkout.Services
         private void UpdateTotal()
         {
             _total = _items.Where(item => IsInOffer(item.SKU) == false).Sum(item => item.UnitPrice);
+            CalculateDiscountedItems();
         }
 
         private bool IsInOffer(string itemSku)
@@ -39,7 +40,30 @@ namespace Checkout.Services
 
         public double GetTotal()
         {
-            return _items.Sum(o => o.UnitPrice);
+            return _total;
+        }
+
+        private void CalculateDiscountedItems()
+        {
+            _offers.ForEach(offer =>
+            {
+                var item = _items.FirstOrDefault(item => item.SKU == offer.SKU);
+                if (item != null)
+                {
+                    var count = _items.Count(o => o.SKU == offer.SKU);
+
+                    _total += Calculate(count, offer, item.UnitPrice);
+                }
+            });
+        }
+
+        private double Calculate(int count, OfferItem offer, double itemUnitPrice)
+        {
+            var discountCount = count / offer.Quantity;
+
+            var calculatedCost = (count % offer.Quantity == 0) ? discountCount * offer.OfferPrice : discountCount * offer.OfferPrice + itemUnitPrice;
+
+            return calculatedCost;
         }
     }
 }
