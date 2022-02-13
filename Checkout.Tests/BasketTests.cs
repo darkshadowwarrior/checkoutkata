@@ -35,7 +35,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenThreeItemSToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_()
+        public void GivenThreeItemSToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_140()
         {
             var basket = new BasketService(_discountService.Object);
 
