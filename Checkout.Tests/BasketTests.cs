@@ -35,7 +35,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenThreeItemSToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_140()
+        public void GivenThreeItemsToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_140()
         {
             var basket = new BasketService(_discountService.Object);
 
@@ -49,7 +49,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenTwoItemToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_80()
+        public void GivenTwoItemsToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_80()
         {
             var basket = new BasketService(_discountService.Object);
 
@@ -75,7 +75,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenThreeOfTheSameItemToScan_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_130()
+        public void GivenThreeOfTheSameItemToScan_ItemsCanBeAddedToBasketCart_DiscountApplied_ReturnsBasketTotalAs_130()
         {
             var basket = new BasketService(_discountService.Object);
 
@@ -89,7 +89,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenASetOfTheItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_235()
+        public void GivenASetOfItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountsApplied_ReturnsBasketTotalAs_235()
         {
             var basket = new BasketService(_discountService.Object);
 
@@ -130,7 +130,7 @@ namespace Checkout.Tests
         }
 
         [Test]
-        public void GivenASetOfTheItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountIdApplied_ReturnsBasketTotalAs_445()
+        public void GivenASetOfItemsToScanInARandomOrder_ItemsCanBeAddedToBasketCart_DiscountsApplied_ReturnsBasketTotalAs_445()
         {
             var basket = new BasketService(_discountService.Object);
 
