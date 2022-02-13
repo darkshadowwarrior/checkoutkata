@@ -1,4 +1,5 @@
 ﻿using Checkout.Models;
+using Checkout.Services;
 using NUnit.Framework;
 
 namespace Checkout.Tests
@@ -8,7 +9,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenOneItemToScan_ItemCanBeAddedToBasketCart()
         {
-            var basket = new Basket();
+            var basket = new BasketService(new DiscountService());
 
             basket.Scan(new Item {SKU = "A99", UnitPrice = 0.50});
 
@@ -20,7 +21,7 @@ namespace Checkout.Tests
         [Test]
         public void GivenTwoItemToScan_ItemsCanBeAddedToBasketCart_ReturnsBasketTotalAs_80()
         {
-            var basket = new Basket();
+            var basket = new BasketService(new DiscountService());
 
             basket.Scan(new Item { SKU = "A99", UnitPrice = 0.50 });
             basket.Scan(new Item { SKU = "B15", UnitPrice = 0.30 });
