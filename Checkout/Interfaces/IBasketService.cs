@@ -7,5 +7,7 @@ namespace Checkout.Interfaces
         void Scan(Item item);
         int GetItemCount();
         double GetTotal();
+        double GetTotalExclusiveOfDiscount();
+
     }
 }

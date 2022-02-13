@@ -33,6 +33,11 @@ namespace Checkout.Services
             return _total;
         }
 
+        public double GetTotalExclusiveOfDiscount()
+        {
+            return _items.Sum(o => o.UnitPrice);
+        }
+
         private void UpdateTotal()
         {
             _total = _items.Where(item => IsInOffer(item.SKU) == false).Sum(item => item.UnitPrice);
