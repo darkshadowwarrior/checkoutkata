@@ -50,18 +50,18 @@ namespace Checkout.Services
                 var item = _items.FirstOrDefault(item => item.SKU == offer.SKU);
                 if (item != null)
                 {
-                    var count = _items.Count(o => o.SKU == offer.SKU);
+                    var countOfItemsInOffer = _items.Count(o => o.SKU == offer.SKU);
 
-                    _total += Calculate(count, offer, item.UnitPrice);
+                    _total += Calculate(countOfItemsInOffer, offer, item.UnitPrice);
                 }
             });
         }
 
-        private double Calculate(int count, OfferItem offer, double itemUnitPrice)
+        private double Calculate(int countOfItemsInOffer, OfferItem offer, double itemUnitPrice)
         {
-            var discountCount = count / offer.Quantity;
+            var totalDiscounts = countOfItemsInOffer / offer.Quantity;
 
-            var calculatedCost = (count % offer.Quantity == 0) ? discountCount * offer.OfferPrice : discountCount * offer.OfferPrice + itemUnitPrice;
+            var calculatedCost = (countOfItemsInOffer % offer.Quantity == 0) ? totalDiscounts * offer.OfferPrice : totalDiscounts * offer.OfferPrice + itemUnitPrice;
 
             return calculatedCost;
         }
